@@ -1,4 +1,4 @@
-# Text2KeyValueCSV
+# Nominal2KeyCSV
 
 This is just a little tool that makes for help you process your CSV file easier by convert 'Text' to be Key like Key-Value Pairs. and  Yes!! It's can convert from Nominal --> Binary
 
