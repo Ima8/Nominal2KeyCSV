@@ -58,7 +58,7 @@ doSomething();
 
 ### Todos
 
- - Tell me want do you want 
+ - Tell me what do you want 
  - or PR whatever you want 
  - Even 'Test' !!!
 
