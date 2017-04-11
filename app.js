@@ -37,6 +37,7 @@ function getsetCol(data, column) {
   });
 }
 
+
 function convertTokey(arrCol, data, column) {
   return new Promise(async (resolve) => {
     const newData = [];
@@ -49,6 +50,41 @@ function convertTokey(arrCol, data, column) {
         newData.push(row);
         newData.push(endOfLine);
         callback();
+      } else {
+        callback();
+      }
+    }, () => {
+      resolve(newData);
+    });
+  });
+}
+
+
+function convertTobin(arrCol, data, column) {
+  return new Promise(async (resolve) => {
+    const newData = [];
+    async.each(data, (row, callback) => {
+      const cols = row.split(','); // แต่ละ Col
+
+      const col = getCol(row, column);
+      const index = arrCol.indexOf(col);
+
+      if (index >= 0) {
+        let i = column + 1;
+        async.eachSeries(arrCol, (item, cb) => {
+          if (item === cols[column]) {
+            cols.splice(i, 0, 1);
+          } else {
+            cols.splice(i, 0, 0);
+          }
+          i += 1;
+          cb();
+        }, () => {
+          cols.splice(column, 1);
+          newData.push(cols);
+          newData.push(endOfLine);
+          callback();
+        });
       } else {
         callback();
       }
@@ -83,6 +119,16 @@ function writeMetaData(path, column, arrCol) {
     });
   });
 }
+
+function convertTo(arrCol, dataArr, column, mode) {
+  return new Promise((resolve) => {
+    if (mode === 'binary') {
+      return resolve(convertTobin(arrCol, dataArr, column));
+    }
+    return resolve(convertTokey(arrCol, dataArr, column));
+  });
+}
+
 function convent(option) {
   return new Promise((resolve, reject) => {
     getData(option.filename).then(async (contents) => {
@@ -90,7 +136,7 @@ function convent(option) {
         const dataArr = contents.split(/\r?\n/);
         const setCol = await getsetCol(dataArr, option.column);
         const arrCol = [...setCol];
-        const newData = await convertTokey(arrCol, dataArr, option.column);
+        const newData = await convertTo(arrCol, dataArr, option.column, option.mode);
         await writeData(option.outputFilename, newData.join(''));
         await writeMetaData(option.outputMetaData, option.column, arrCol);
         resolve(true);
