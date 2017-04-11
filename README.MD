@@ -15,14 +15,14 @@ This is just a little tool that makes for help you process your CSV file easier 
 ### Installation
 
 ```sh
-$ npm install text2keyvalue-csv --save
+$ npm install nominal2key-csv --save
 ```
 ### How to use 
 
 Basic use ...
 
 ```
-const txt2kv = require('text2keyvalue-csv');
+const txt2kv = require('nominal2key-csvv');
 
 txt2kv({
   filename: './data.csv',
@@ -35,7 +35,7 @@ txt2kv({
 With async await ...
 
 ```
-const txt2kv = require('text2keyvalue-csv');
+const txt2kv = require('nominal2key-csv');
 
 async function doSomething() {
   const status = await txt2kv({
@@ -52,7 +52,7 @@ doSomething();
 
 ### Convent From Nominal to Binary
 ```
-const txt2kv = require('text2keyvalue-csv');
+const txt2kv = require('nominal2key-csv');
 
 txt2kv({
   filename: './data.csv',
