@@ -15,7 +15,6 @@ function writeData(path, data) {
   return new Promise((resolve, reject) => {
     fs.writeFile(path, data, 'utf8', (err) => {
       if (err) return reject(err);
-      console.log(`DONE : ${path}`);
       return resolve(true);
     });
   });
@@ -71,7 +70,6 @@ function writeMetaData(path, column, arrCol) {
         let ppData;
         if (err) ppData = [];
         if (!err) ppData = JSON.parse(contents);
-        console.log(ppData);
         const data = {
           [column]: arrColKeyVal,
         };
@@ -79,7 +77,6 @@ function writeMetaData(path, column, arrCol) {
 
         fs.writeFile(path, JSON.stringify(ppData), {/* flag: 'a',*/ encoding: 'utf8' }, (err) => {
           if (err) return reject(err);
-          console.log(`DONE : ${path}`);
           return resolve(true);
         });
       });
@@ -89,13 +86,17 @@ function writeMetaData(path, column, arrCol) {
 function convent(option) {
   return new Promise((resolve, reject) => {
     getData(option.filename).then(async (contents) => {
-      const dataArr = contents.split(/\r?\n/);
-      const setCol = await getsetCol(dataArr, option.column);
-      const arrCol = [...setCol];
-      const newData = await convertTokey(arrCol, dataArr, option.column);
-      await writeData(option.outputFilename, newData.join(''));
-      await writeMetaData(option.outputMetaData, option.column, arrCol);
-      resolve(true);
+      try {
+        const dataArr = contents.split(/\r?\n/);
+        const setCol = await getsetCol(dataArr, option.column);
+        const arrCol = [...setCol];
+        const newData = await convertTokey(arrCol, dataArr, option.column);
+        await writeData(option.outputFilename, newData.join(''));
+        await writeMetaData(option.outputMetaData, option.column, arrCol);
+        resolve(true);
+      } catch (e) {
+        reject(e);
+      }
     });
   });
 }

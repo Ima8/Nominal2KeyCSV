@@ -1,9 +1,9 @@
 {
-  "name": "Text2KeyValueCSV", // ชื่อ package
-  "version": "1.0.0", // เลขเวอร์ชัน
+  "name": "text2keyvalue-csv", 
+  "version": "1.0.0", 
   "description": "This is just a little tool that makes for help you process your CSV file easier by convert 'Text' to be Key like Key-Value Pairs.", 
   "main": "app.js", 
-   "keywords": [ // keywords จะปรากฎในหน้า package ของเราบน npmjs.com
+   "keywords": [ 
     "csv",
     "convent",
     "file",
@@ -14,7 +14,7 @@
   ],
   "author": "Issaret Prachitmutita",
   "license": "MIT",
-  "bugs": { // ช่องทางแจ้ง bug ของ package
+  "bugs": { 
     "url": "https://github.com/ima8/Text2KeyValueCSV/issues"
   },
   "homepage": "https://github.com/ima8/Text2KeyValueCSV#readme",
