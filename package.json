@@ -1,6 +1,6 @@
 {
   "name": "nominal2key-csv", 
-  "version": "1.1.2", 
+  "version": "1.1.3", 
   "description": "This is just a little tool that makes for help you process your CSV file easier by convert 'Text' to be Key like Key-Value Pairs. and  Yes!! It's can convert from Nominal --> Binary", 
   "main": "app.js", 
    "keywords": [ 
@@ -17,6 +17,10 @@
   ],
   "author": "Issaret Prachitmutita",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ima8/Nominal2KeyCSV.git"
+  },
   "bugs": { 
     "url": "https://github.com/ima8/Nominal2KeyCSV/issues"
   },
